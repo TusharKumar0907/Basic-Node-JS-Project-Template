@@ -23,6 +23,10 @@ const apiRoutes = require('./routes');
 
 const app = express();
 
+//express does not know how to access data from request so initially there was a library called bodyparser but there is other way 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 app.use('/api', apiRoutes);
 
 app.listen(ServerConfig.PORT, () => {
