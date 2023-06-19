@@ -1,44 +1,30 @@
-This is a basic node js project template, which anyone can use as it has been prepared, by keeping some of the most important code principles and project management recommendations. Feel free to change anything.
+Use Basic nodejs project template from ( https://github.com/TusharKumar0907/Basic-Node-JS-Project-Templates )
+Then open the project folder and then do npm install and then create a .env file and write the PORT here
 
-src -> Inside the src folder all the actual source code regarding the project will reside, this will not include any kind of tests. (You might want to make separate tests folder)
-
-Lets take a look inside the src folder
-
-config -> In this folder anything and everything regarding any configurations or setup of a library or module will be done. For example: setting up dotenv so that we can use the environment variables anywhere in a cleaner fashion, this is done in the server-config.js. One more example can be to setup you logging library that can help you to prepare meaningful logs (logs are helpful in error detection, it help us to show the state just before the error , also it helps us in statstics analysis , if we keep log of every request that is coming then we can determine at what time we are getting maximum number of request) , so configuration for this library should also be done here.
-
-routes -> In the routes(these are nothing but the path from the client to server) folder, we register a route and the corresponding middleware(Middleware can process request objects multiple times before the server works for that request.) and controllers to it.
-
-middlewares -> they are just going to intercept the incoming requests where we can write our validators, authenticators etc.
-
-controllers -> they are kind of the last middlewares as post them you call you business layer to execute the budiness logic. In controllers we just receive the incoming requests and data and then pass it to the business layer, and once business layer returns an output, we structure the API response in controllers and send the output.
-
-repositories -> this folder contains all the logic using which we interact the DB by writing queries, all the raw queries or ORM queries will go here.
-
-services -> contains the buiness logic and interacts with repositories for data from the database
-
-utils -> contains helper methods, error classes etc.
-
-Setup the project
-Download this template from github and open it in your favourite text editor.
-Go inside the folder path and execute the following command:
-npm install
-In the root directory create a .env file and add the following env variables
-
-    PORT=<port number of your choice>
-ex:
-
-    PORT=3000
-go inside the src folder and execute the following command:
-
-we are trying to create database using sequelize which is an ORM(that enables us to use JavaScript to interact with our database.)
-
+Now, go inside the src folder and give command
 npx sequelize init
-By executing the above command you will get migrations and seeders folder along with a config.json inside the config folder.
 
-If you're setting up your development environment, then write the username of your db, password of your db and in dialect mention whatever db you are using for ex: mysql, mariadb etc
+Change the database details in the config.json file
 
-If you're setting up test or prod environment, make sure you also replace the host with the hosted db url.
+Just Create the database flights using Sequelize CLI using the following command
+npx sequelize db:create
+The  above commmand is going to create a database that is mentioned in config.json file
 
-To run the server execute
+Now, Create the table of name Airplane which is having Two columns modelNumber of type string and capacity of type integer
+npx sequelize model:generate --name Airplane --attributes modelNumber:string, capacity:integer
 
-npm run dev
+Now do, npx sequelize db:migrate , It will apply all the pending migrations into the database
+
+If we wan to undo migrations then do
+npx sequelize db:migrate:undo
+
+Now,prepare the repositories file and these repositories file is going to communicate with models file
+
+Now, prepare the service file and these service use repositories to communicate with the database
+
+Now, prepare the controller file and these will interact with the services
+
+Now, create a routes file this file is going to interact with controller file
+
+
+
